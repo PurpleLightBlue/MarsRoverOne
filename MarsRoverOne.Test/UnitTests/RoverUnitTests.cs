@@ -53,7 +53,7 @@ namespace MarsRoverOne.Test.UnitTests
             position.YAxis = 2;
             position.Direction = Direction.N;
             var rover = new Rover(1, explorationArea, position);
-            Assert.Throws<Exception>(() => rover.ExecuteMovement("MMMMMMMMMMMMMMMMMMMM"));
+            Assert.Throws<OutOfBoundsException>(() => rover.ExecuteMovement("MMMMMMMMMMMMMMMMMMMM"));
         }
 
         [Fact]

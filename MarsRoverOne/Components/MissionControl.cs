@@ -33,6 +33,8 @@ namespace MarsRoverOne.Components
                 var xAxisString = Console.ReadLine()?.Trim();
                 if (!int.TryParse(xAxisString, out var xAxisInt))
                 {
+                    Console.WriteLine(
+                        "Invalid character entered, please enter a valid number for the X Axis.");
                     continue;
                 }
 
@@ -46,6 +48,8 @@ namespace MarsRoverOne.Components
                 var yAxisString = Console.ReadLine()?.Trim();
                 if (!int.TryParse(yAxisString, out var yAxisInt))
                 {
+                    Console.WriteLine(
+                        "Invalid character entered, please enter a valid number for the Y Axis.");
                     continue;
                 }
 
@@ -135,7 +139,7 @@ namespace MarsRoverOne.Components
                         continue;
                     }
 
-                    if (!Enum.TryParse(typeof(Direction), roverStartPositionStringArray[2], true, out var result))
+                    if (!Enum.TryParse(typeof(Direction), roverStartPositionStringArray[2], false, out var result))
                     {
                         Console.WriteLine("Cardinal Direction provided is not valid.");
                         continue;
@@ -189,7 +193,7 @@ namespace MarsRoverOne.Components
                             continue;
                         }
 
-                        if (!Enum.TryParse(typeof(Command), command.ToString(), true, out var result))
+                        if (!Enum.TryParse(typeof(Command), command.ToString(), false, out var result))
                         {
                             Console.WriteLine($"Invalid command character provided: {command}");
                             commandValid = false;
@@ -209,7 +213,7 @@ namespace MarsRoverOne.Components
                 rover.CommandString = roverCommand;
             }
 
-            Console.WriteLine($"Start rovers moving?");
+            Console.WriteLine($"Start rovers moving? (hit any key)");
             Console.ReadKey();
 
             var roverToMoveCounter = 0;
@@ -250,6 +254,10 @@ namespace MarsRoverOne.Components
 
         public bool IsPositionOccupied(IPosition position, int roverId)
         {
+            if (position == null)
+            {
+                throw new ArgumentNullException(nameof(position));
+            }
             var trimmedDictionary = RoverPositionDictionary.Where(dict => dict.Key != roverId);
             var matches = trimmedDictionary.Where(dict =>
                 dict.Value.YAxis == position.YAxis && dict.Value.XAxis == position.XAxis);

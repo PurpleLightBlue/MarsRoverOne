@@ -11,7 +11,6 @@ namespace MarsRoverOne.Components
         IPosition TheoreticalMovementExecution(string instructionsToBeTested);
         void ExecuteMovement();
         void ExecuteMovement(string movementInput);
-        void CheckForOtherRovers();
         string ReportPosition();
     }
 }

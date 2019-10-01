@@ -1,4 +1,5 @@
-﻿using MarsRoverOne.Components;
+﻿using System;
+using MarsRoverOne.Components;
 using NSubstitute;
 using Xunit;
 
@@ -45,6 +46,21 @@ namespace MarsRoverOne.Test.UnitTests
             newPosition.XAxis = 3;
             newPosition.Direction = Direction.S;
             Assert.False(missionControl.IsPositionOccupied(newPosition, 2));
+            missionControl.RoverPositionDictionary.Clear();
+        }
+
+        [Fact]
+        public void GivenMissionControlCreated_WhenIsPositionOccupiedCalledWithNullPosition_ThenExceptionThrown()
+        {
+            var position = Substitute.For<IPosition>();
+            position.YAxis = 1;
+            position.XAxis = 2;
+            position.Direction = Direction.N;
+
+            var missionControl = MissionControl.Instance;
+            missionControl.RoverPositionDictionary.Add(1, position);
+
+            Assert.Throws<ArgumentNullException>(() => missionControl.IsPositionOccupied(null, 2));
             missionControl.RoverPositionDictionary.Clear();
         }
     }

@@ -69,11 +69,6 @@ namespace MarsRoverOne.Components
             }
         }
 
-        public void CheckForOtherRovers()
-        {
-            throw new NotImplementedException();
-        }
-
         public string ReportPosition()
         {
             return RoverPosition.GetConcatenatedPositionString();
@@ -92,7 +87,7 @@ namespace MarsRoverOne.Components
                     case Direction.N:
                         if ((tempYAxisValue += 1) > ExplorationArea.YAxisMaxValue)
                         {
-                            throw new Exception("Movement outside of exploration area");
+                            throw new OutOfBoundsException("Movement outside of exploration area");
                         }
 
                         position.YAxis += 1;
@@ -100,7 +95,7 @@ namespace MarsRoverOne.Components
                     case Direction.S:
                         if ((tempYAxisValue -= 1) < 0)
                         {
-                            throw new Exception("Movement outside of exploration area");
+                            throw new OutOfBoundsException("Movement outside of exploration area");
                         }
 
                         position.YAxis -= 1;
@@ -108,7 +103,7 @@ namespace MarsRoverOne.Components
                     case Direction.E:
                         if ((tempXAxisValue += 1) > ExplorationArea.XAxisMaxValue)
                         {
-                            throw new Exception("Movement outside of exploration area");
+                            throw new OutOfBoundsException("Movement outside of exploration area");
                         }
 
                         position.XAxis += 1;
@@ -116,7 +111,7 @@ namespace MarsRoverOne.Components
                     case Direction.W:
                         if ((tempXAxisValue -= 1) < 0)
                         {
-                            throw new Exception("Movement outside of exploration area");
+                            throw new OutOfBoundsException("Movement outside of exploration area");
                         }
 
                         position.XAxis -= 1;
